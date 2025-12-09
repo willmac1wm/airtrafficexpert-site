@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plane, Menu, X, Gamepad2, Home, Briefcase, Cpu } from 'lucide-react';
+import { Plane, Menu, X, Gamepad2, Home, Briefcase, Cpu, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface LayoutProps {
@@ -18,6 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { path: '/', label: 'Home', icon: Home },
     { path: '/services', label: 'Services', icon: Briefcase },
     { path: '/simulation', label: 'Simulator', icon: Gamepad2 },
+    { path: '/rfp-tracker', label: 'RFP Tracker', icon: FileText },
     { path: '/admin-tools', label: 'Internal Tools', icon: Cpu },
   ];
 

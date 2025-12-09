@@ -6,6 +6,7 @@ import Services from './components/Services';
 import ContentGenerator from './components/ContentGenerator';
 import Blog from './components/Blog';
 import GameEmbed from './components/GameEmbed';
+import RfpTracker from './components/RfpTracker';
 import { PodcastPage, YoutubePage, NewsPage } from './components/MediaPages';
 
 const HomePage: React.FC = () => (
@@ -42,6 +43,16 @@ const AdminToolsPage: React.FC = () => (
   </div>
 );
 
+const RfpTrackerPage: React.FC = () => (
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="mb-8">
+      <h1 className="text-3xl font-bold text-gray-900">RFP Opportunity Tracker</h1>
+      <p className="text-gray-500 mt-2">Track and analyze government contract opportunities.</p>
+    </div>
+    <RfpTracker />
+  </div>
+);
+
 const App: React.FC = () => {
   return (
     <Router>
@@ -51,6 +62,7 @@ const App: React.FC = () => {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/admin-tools" element={<AdminToolsPage />} />
+          <Route path="/rfp-tracker" element={<RfpTrackerPage />} />
           <Route path="/podcast" element={<PodcastPage />} />
           <Route path="/youtube" element={<YoutubePage />} />
           <Route path="/news" element={<NewsPage />} />
