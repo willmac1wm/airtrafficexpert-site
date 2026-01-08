@@ -49,6 +49,13 @@ export const SERVICES: Service[] = [
     description: 'Watch visual breakdowns of complex airspace scenarios, training tutorials, and simulator walkthroughs.',
     iconName: 'Youtube',
     link: '/youtube'
+  },
+  {
+    id: '8',
+    title: 'OpenSTARS Simulator',
+    description: 'Experience realistic air traffic control with our browser-based radar simulator. Guide aircraft using authentic FAA phraseology.',
+    iconName: 'Radar',
+    link: '/simulation'
   }
 ];
 
