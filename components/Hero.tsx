@@ -38,14 +38,10 @@ const Hero: React.FC = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-400 border-t border-slate-800 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-400 border-t border-slate-800 pt-8">
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />
               <span>SAM.gov Registered</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-blue-500" />
-              <span>Top Secret Clearance</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />
