@@ -139,8 +139,10 @@ const ScrollToTop: React.FC = () => {
 const App: React.FC = () => {
   // Handle non-hash routes from external links on mount
   useEffect(() => {
+    console.log('App mounted, current location:', window.location.href);
     if (window.location.pathname !== '/' && !window.location.hash) {
       const path = window.location.pathname;
+      console.log('Redirecting to hash route:', `/#${path}`);
       window.location.replace(`/#${path}`);
       return;
     }
