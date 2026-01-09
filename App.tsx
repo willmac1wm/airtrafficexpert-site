@@ -136,13 +136,16 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-// Handle non-hash routes from external links BEFORE Router mounts
-if (typeof window !== 'undefined' && window.location.pathname !== '/' && !window.location.hash) {
-  const path = window.location.pathname;
-  window.location.replace(`/#${path}`);
-}
-
 const App: React.FC = () => {
+  // Handle non-hash routes from external links on mount
+  useEffect(() => {
+    if (window.location.pathname !== '/' && !window.location.hash) {
+      const path = window.location.pathname;
+      window.location.replace(`/#${path}`);
+      return;
+    }
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
