@@ -1,13 +1,15 @@
 import React from 'react';
 import { ArrowRight, CheckCircle, Gamepad2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative bg-slate-900 overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&q=80"
+          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&h=1080&fit=crop&auto=format&q=80"
           alt="Air Traffic Control Tower"
           className="w-full h-full object-cover opacity-20"
         />
@@ -32,10 +34,18 @@ const Hero: React.FC = () => {
               Our Services
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link to="/simulation" className="inline-flex items-center justify-center px-6 py-3 border border-slate-600 text-base font-medium rounded-md text-gray-300 hover:text-white hover:bg-slate-800 transition-all backdrop-blur-sm gap-2">
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate('/simulation');
+              }}
+              type="button"
+              className="inline-flex items-center justify-center px-6 py-3 border border-slate-600 text-base font-medium rounded-md text-gray-300 hover:text-white hover:bg-slate-800 transition-all backdrop-blur-sm gap-2"
+            >
               <Gamepad2 className="h-5 w-5" />
               Try Simulator
-            </Link>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-400 border-t border-slate-800 pt-8">

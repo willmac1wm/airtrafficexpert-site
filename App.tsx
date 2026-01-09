@@ -1,5 +1,5 @@
-import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -22,26 +22,27 @@ const ServicesPage: React.FC = () => (
   </div>
 );
 
-const SimulationPage: React.FC = () => (
-  <div className="bg-slate-900 min-h-screen">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-sm font-medium mb-4">
-          <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
-          Browser-Based Training
+const SimulationPage: React.FC = () => {
+  return (
+    <div className="bg-slate-900 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-sm font-medium mb-4">
+            <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
+            Browser-Based Training
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-green-500">OPEN</span>STARS Simulator
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Experience realistic air traffic control with our browser-based radar simulator. 
+            Guide aircraft through your sector using authentic FAA phraseology and procedures.
+          </p>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          <span className="text-green-500">OPEN</span>STARS Simulator
-        </h1>
-        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-          Experience realistic air traffic control with our browser-based radar simulator. 
-          Guide aircraft through your sector using authentic FAA phraseology and procedures.
-        </p>
-      </div>
-      
-      {/* Game Component */}
-      <GameEmbed />
+        
+        {/* Game Component */}
+        <GameEmbed />
       
       {/* About Section */}
       <div className="mt-16 bg-slate-800/50 border border-slate-700 rounded-xl p-8">
@@ -87,7 +88,8 @@ const SimulationPage: React.FC = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 const AdminToolsPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -99,14 +101,51 @@ const AdminToolsPage: React.FC = () => (
   </div>
 );
 
+// ScrollToTop component to handle scroll restoration
+const ScrollToTop: React.FC = () => {
+  const location = useLocation();
+  const prevPathRef = React.useRef<string>('');
+
+  useEffect(() => {
+    // Only scroll if pathname actually changed (not just hash)
+    const currentPath = location.pathname;
+    if (prevPathRef.current && prevPathRef.current !== currentPath) {
+      // Only scroll when navigating to a different route
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    prevPathRef.current = currentPath;
+  }, [location.pathname]);
+
+  // Prevent anchor links with href="#" from scrolling
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href="#"]') || target.closest('a[href="#top"]');
+      if (anchor) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick, true);
+    return () => {
+      document.removeEventListener('click', handleAnchorClick, true);
+    };
+  }, []);
+
+  return null;
+};
+
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
+          <Route path="/simulator" element={<SimulationPage />} />
           <Route path="/admin-tools" element={<AdminToolsPage />} />
           <Route path="/podcast" element={<PodcastPage />} />
           <Route path="/youtube" element={<YoutubePage />} />

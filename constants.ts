@@ -66,7 +66,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     excerpt: 'Exploring how remote tower technology is reshaping air traffic management for regional airports, reducing costs while maintaining safety standards.',
     date: 'Oct 12, 2023',
     category: 'Technology',
-    imageUrl: 'https://picsum.photos/800/600?random=1',
+    imageUrl: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop&auto=format&q=80',
   },
   {
     id: '2',
@@ -74,7 +74,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     excerpt: 'A comprehensive guide to the upcoming changes in FAA regulations affecting commercial drone operations and airspace integration.',
     date: 'Sep 28, 2023',
     category: 'Regulations',
-    imageUrl: 'https://picsum.photos/800/600?random=2',
+    imageUrl: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=800&h=600&fit=crop&auto=format&q=80',
   },
   {
     id: '3',
@@ -82,7 +82,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     excerpt: 'Analyzing the critical role of human factors engineering in reducing controller fatigue and improving situational awareness.',
     date: 'Sep 15, 2023',
     category: 'Safety',
-    imageUrl: 'https://picsum.photos/800/600?random=3',
+    imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=600&fit=crop&auto=format&q=80',
   },
 ];
 

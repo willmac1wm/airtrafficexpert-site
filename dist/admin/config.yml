@@ -1,0 +1,22 @@
+backend:
+  name: github
+  repo: willmac1wm/airtrafficexpert-site
+  branch: main
+
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Author", name: "author", widget: "string", default: "Will Macomber"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["industry analysis"]}
+      - {label: "Body", name: "body", widget: "markdown"}

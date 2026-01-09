@@ -1,7 +1,7 @@
 import React from 'react';
 import { TowerControl, GraduationCap, Gavel, Cpu, Mic, Youtube, Newspaper } from 'lucide-react';
 import { SERVICES } from '../constants';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const iconMap: Record<string, React.FC<any>> = {
   TowerControl,
@@ -43,6 +43,8 @@ const RadarIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const Services: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="py-20 bg-white" id="services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,10 +66,14 @@ const Services: React.FC = () => {
             if (isSimulator) {
               // Special card for the simulator
               return (
-                <Link 
-                  key={service.id} 
-                  to={service.link}
-                  className="group relative bg-slate-900 p-6 rounded-xl shadow-lg hover:shadow-2xl border border-green-500/30 transition-all duration-300 flex flex-col hover:border-green-500/60 hover:shadow-green-500/20"
+                <div
+                  key={service.id}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate(service.link);
+                  }}
+                  className="group relative bg-slate-900 p-6 rounded-xl shadow-lg hover:shadow-2xl border border-green-500/30 transition-all duration-300 flex flex-col hover:border-green-500/60 hover:shadow-green-500/20 cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-400 rounded-t-xl"></div>
                   <div className="h-16 w-16 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -80,7 +86,7 @@ const Services: React.FC = () => {
                   <span className="inline-flex items-center text-green-500 font-medium group-hover:text-green-400 mt-auto">
                     Try it now <span className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span>
                   </span>
-                </Link>
+                </div>
               );
             }
             

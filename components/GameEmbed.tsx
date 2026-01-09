@@ -4,8 +4,19 @@ import { Play, Maximize2, ExternalLink, Zap, Target, Trophy, Radio } from 'lucid
 const GameEmbed: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
+  const handleStartGame = () => {
+    setGameStarted(true);
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+      const iframe = document.querySelector('iframe[title="OpenSTARS ATC Simulator"]');
+      if (iframe) {
+        iframe.focus();
+      }
+    }, 100);
+  };
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" id="game-embed">
       {/* Game Window */}
       <div className="bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-green-500/30">
         <div className="bg-slate-800 px-4 py-3 flex justify-between items-center border-b border-green-500/20">
@@ -52,9 +63,18 @@ const GameEmbed: React.FC = () => {
                 </h2>
                 <p className="text-green-400/60 font-mono text-sm mb-8">Standard Terminal Automation Replacement System</p>
                 
-                <div className="mb-8 inline-block p-5 rounded-full bg-green-900/20 border border-green-500/30 hover:bg-green-900/30 transition-colors cursor-pointer" onClick={() => setGameStarted(true)}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleStartGame();
+                  }}
+                  type="button"
+                  className="mb-8 inline-block p-5 rounded-full bg-green-900/20 border border-green-500/30 hover:bg-green-900/30 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500"
+                  aria-label="Launch Simulator"
+                >
                   <Play className="h-14 w-14 text-green-500 ml-1" />
-                </div>
+                </button>
                 
                 <p className="text-gray-400 mb-8 max-w-md mx-auto text-sm">
                   Guide aircraft through your sector using authentic FAA phraseology. 
@@ -62,8 +82,13 @@ const GameEmbed: React.FC = () => {
                 </p>
                 
                 <button 
-                  onClick={() => setGameStarted(true)}
-                  className="group relative px-10 py-4 bg-green-600 hover:bg-green-500 text-white font-bold uppercase tracking-wider transition-all hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] rounded-lg"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleStartGame();
+                  }}
+                  type="button"
+                  className="group relative px-10 py-4 bg-green-600 hover:bg-green-500 text-white font-bold uppercase tracking-wider transition-all hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <Radio size={20} />
