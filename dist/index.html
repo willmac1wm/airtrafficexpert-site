@@ -13,17 +13,18 @@
   <body>
     <div id="root"></div>
     <script>
-      // Test if JavaScript is loading
+      // Diagnostic script to check if JS is loading
       console.log('HTML loaded, checking for React...');
       window.addEventListener('load', () => {
         console.log('Page fully loaded');
         setTimeout(() => {
-          if (!document.querySelector('#root').hasChildNodes()) {
-            console.error('React did not mount! Root is empty.');
+          const root = document.querySelector('#root');
+          if (!root || !root.hasChildNodes()) {
+            console.error('React did not mount! Root is empty. Check Network tab for JS file errors.');
           } else {
             console.log('React appears to have mounted');
           }
-        }, 1000);
+        }, 2000);
       });
     </script>
   </body>
