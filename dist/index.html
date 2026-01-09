@@ -12,5 +12,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Test if JavaScript is loading
+      console.log('HTML loaded, checking for React...');
+      window.addEventListener('load', () => {
+        console.log('Page fully loaded');
+        setTimeout(() => {
+          if (!document.querySelector('#root').hasChildNodes()) {
+            console.error('React did not mount! Root is empty.');
+          } else {
+            console.log('React appears to have mounted');
+          }
+        }, 1000);
+      });
+    </script>
   </body>
 </html>
