@@ -19,8 +19,8 @@ const Hero: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="lg:w-2/3">
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
-            <span className="flex h-2 w-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
-            FAA Certified Consultant
+            <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
+            ✈️ FAA Certified | Now Auto-Deploying!
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
             Navigating the Complexities of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Airspace Management</span>
@@ -48,10 +48,14 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-400 border-t border-slate-800 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-400 border-t border-slate-800 pt-8">
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />
               <span>SAM.gov Registered</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-blue-500" />
+              <span>SECRET Clearance</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />
