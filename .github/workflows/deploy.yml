@@ -35,6 +35,20 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Check for GCP credentials
+        id: check-secret
+        run: |
+          if [ -z "${{ secrets.GCP_SA_KEY }}" ]; then
+            echo "⚠️  GCP_SA_KEY secret not found!"
+            echo "Please set up authentication:"
+            echo "1. Go to: https://console.cloud.google.com/iam-admin/serviceaccounts?project=495546644086"
+            echo "2. Create a service account with Cloud Run Admin role"
+            echo "3. Create a JSON key and add it to GitHub Secrets as GCP_SA_KEY"
+            echo "See DEPLOY.md for detailed instructions"
+            exit 1
+          fi
+          echo "✅ GCP credentials found"
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -42,19 +56,26 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
 
       - name: Deploy to Cloud Run
         run: |
+          echo "🚀 Deploying to Cloud Run..."
           gcloud run deploy ${{ env.SERVICE_NAME }} \
             --source . \
             --region ${{ env.REGION }} \
             --platform managed \
             --allow-unauthenticated \
-            --project ${{ env.PROJECT_ID }}
+            --project ${{ env.PROJECT_ID }} \
+            --quiet
 
       - name: Output service URL
         run: |
-          echo "🚀 Deployment complete!"
-          gcloud run services describe ${{ env.SERVICE_NAME }} \
+          echo "✅ Deployment complete!"
+          URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
             --region ${{ env.REGION }} \
-            --format="value(status.url)"
+            --project ${{ env.PROJECT_ID }} \
+            --format="value(status.url)")
+          echo "🌐 Your site is live at: $URL"
+          echo "::notice title=Deployment Complete::Site deployed to $URL"

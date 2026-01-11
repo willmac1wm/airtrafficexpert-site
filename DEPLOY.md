@@ -4,23 +4,42 @@
 
 **Set up once, then every push to `main` auto-deploys!**
 
-1. **Create a Service Account** (one-time setup):
-   ```bash
-   # In Google Cloud Console:
-   # 1. Go to IAM & Admin > Service Accounts
-   # 2. Create service account named "github-actions"
-   # 3. Grant roles: Cloud Run Admin, Service Account User
-   # 4. Create JSON key and download it
-   ```
+### Step 1: Create Service Account
 
-2. **Add GitHub Secret**:
-   - Go to your GitHub repo → Settings → Secrets and variables → Actions
-   - Click "New repository secret"
-   - Name: `GCP_SA_KEY`
-   - Value: Paste the entire JSON key file content
-   - Click "Add secret"
+1. **Go to Google Cloud Console**: https://console.cloud.google.com/iam-admin/serviceaccounts?project=495546644086
+2. **Click "Create Service Account"**
+3. **Name it**: `github-actions-deploy`
+4. **Click "Create and Continue"**
+5. **Grant these roles**:
+   - `Cloud Run Admin`
+   - `Service Account User`
+   - `Storage Admin` (for building images)
+6. **Click "Continue"** then **"Done"**
 
-3. **Push to main** - That's it! Every push auto-deploys.
+### Step 2: Create JSON Key
+
+1. **Click on the service account** you just created
+2. **Go to "Keys" tab**
+3. **Click "Add Key" → "Create new key"**
+4. **Select "JSON"**
+5. **Click "Create"** - This downloads the key file
+
+### Step 3: Add GitHub Secret
+
+1. **Go to your GitHub repo**: https://github.com/willmac1wm/airtrafficexpert-site
+2. **Click**: Settings → Secrets and variables → Actions
+3. **Click**: "New repository secret"
+4. **Name**: `GCP_SA_KEY`
+5. **Value**: Open the downloaded JSON file, copy ALL its contents, and paste here
+6. **Click**: "Add secret"
+
+### Step 4: Test Deployment
+
+1. **Push any change** to `main` branch
+2. **Go to**: Actions tab in GitHub
+3. **Watch the deployment** - it should complete in ~3-5 minutes
+
+**That's it!** Every push to `main` will now auto-deploy. 🚀
 
 ## Option 2: Quick Deploy Script
 
