@@ -9,17 +9,23 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Serve static files from dist directory (CSS, JS, images, etc.)
+// This must come BEFORE the catch-all route
 app.use(express.static(join(__dirname, 'dist'), {
   maxAge: '1y',
   etag: true,
   lastModified: true
 }));
 
-// Handle all routes - serve index.html for SPA (HashRouter)
+// Handle all routes - serve index.html for SPA (BrowserRouter)
 // This ensures React Router can handle client-side routing
-app.get('*', (req, res) => {
-  // If it's a request for a static asset, 404 will be returned by express.static above
-  // Otherwise, serve index.html for SPA routing
+// Static assets are served above, so this only catches page routes
+app.get('*', (req, res, next) => {
+  // Skip if it's a static asset request (has file extension)
+  if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
+    return next();
+  }
+  
+  // Serve index.html for all page routes
   res.sendFile(join(__dirname, 'dist', 'index.html'), (err) => {
     if (err) {
       console.error('Error serving index.html:', err);

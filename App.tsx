@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -143,15 +143,8 @@ const ScrollToTop: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  // Handle non-hash routes from external links on mount
   useEffect(() => {
     console.log('App mounted, current location:', window.location.href);
-    if (window.location.pathname !== '/' && !window.location.hash) {
-      const path = window.location.pathname;
-      console.log('Redirecting to hash route:', `/#${path}`);
-      window.location.replace(`/#${path}`);
-      return;
-    }
   }, []);
 
   return (
@@ -168,6 +161,7 @@ const App: React.FC = () => {
           <Route path="/podcast" element={<PodcastPage />} />
           <Route path="/youtube" element={<YoutubePage />} />
           <Route path="/news" element={<NewsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
     </Router>
