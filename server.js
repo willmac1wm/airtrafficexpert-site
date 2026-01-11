@@ -30,9 +30,15 @@ app.use(express.static(distPath, {
 // Handle all routes - serve index.html for SPA (BrowserRouter)
 // This ensures React Router can handle client-side routing
 // Static assets are served above, so this only catches page routes
-app.get('*', (req, res, next) => {
+// Using app.use for catch-all since Express 5.x doesn't support '*' wildcard
+app.use((req, res, next) => {
   // Skip if it's a static asset request (has file extension)
   if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
+    return next();
+  }
+  
+  // Only handle GET requests for page routes
+  if (req.method !== 'GET') {
     return next();
   }
   
