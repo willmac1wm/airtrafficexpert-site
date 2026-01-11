@@ -56,3 +56,4 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serving files from: ${join(__dirname, 'dist')}`);
   console.log('Listening on all interfaces (0.0.0.0)');
 });
+// Build timestamp: Sat Jan 10 23:05:42 EST 2026
