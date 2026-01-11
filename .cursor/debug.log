@@ -1,0 +1,7 @@
+{"location":"premiumService.ts:initializePremium","message":"initializePremium called","data":{"isNative":true,"platform":"ios","userId":"none"},"timestamp":1768154045265,"sessionId":"debug-session","hypothesisId":"A"}
+{"location":"premiumService.ts:import","message":"RevenueCat import failed","data":{"error":"TypeError: Module name, '@revenuecat/purchases-capacitor' does not resolve to a valid URL."},"timestamp":1768154045277,"sessionId":"debug-session","hypothesisId":"A"}
+{"location":"UpgradeModal.tsx:loadProducts","message":"Products loaded","data":{"count":3,"ids":["com.openstars.credits.100","com.openstars.credits.500","com.openstars.credits.1500"]},"timestamp":1768154781187,"sessionId":"debug-session","hypothesisId":"C"}
+{"location":"UpgradeModal.tsx:useEffect","message":"Modal opened","data":{"isNative":true,"userSignedIn":false},"timestamp":1768154781050,"sessionId":"debug-session","hypothesisId":"D"}
+{"location":"MainMenu.tsx:banner","message":"Golden banner clicked","data":{"step":"DIFFICULTY"},"timestamp":1768154781007,"sessionId":"debug-session","hypothesisId":"D"}
+{"location":"premiumService.ts:getCreditProducts","message":"RC module not available - returning fallback","data":{},"timestamp":1768154781085,"sessionId":"debug-session","hypothesisId":"A"}
+{"location":"premiumService.ts:getCreditProducts","message":"getCreditProducts called","data":{"isNative":true,"rcInitialized":false},"timestamp":1768154781053,"sessionId":"debug-session","hypothesisId":"C"}

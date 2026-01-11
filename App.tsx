@@ -7,6 +7,10 @@ import ContentGenerator from './components/ContentGenerator';
 import Blog from './components/Blog';
 import GameEmbed from './components/GameEmbed';
 import SimulatorBanner from './components/SimulatorBanner';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import BlogPostDetail from './components/BlogPostDetail';
+import { AuthProvider } from './contexts/AuthContext';
 import { PodcastPage, YoutubePage, NewsPage } from './components/MediaPages';
 
 const HomePage: React.FC = () => (
@@ -101,10 +105,54 @@ const SimulationPage: React.FC = () => {
 
 const AdminToolsPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-     <div className="mb-8">
+    <div className="mb-8">
       <h1 className="text-3xl font-bold text-gray-900">Consultant Tools</h1>
-      <p className="text-gray-500 mt-2">AI-powered utilities for content creation.</p>
+      <p className="text-gray-500 mt-2">Internal utilities and portals.</p>
     </div>
+    
+    {/* Quick Links */}
+    <div className="grid md:grid-cols-2 gap-6 mb-8">
+      <a 
+        href="https://dtis-secure-portal.app" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="flex items-center gap-4 p-6 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-colors group"
+      >
+        <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-lg">DTIS ETC-ATC Portal</h3>
+          <p className="text-slate-400 text-sm">Secure client portal access</p>
+        </div>
+        <svg className="w-5 h-5 text-slate-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+      
+      <a 
+        href="https://console.firebase.google.com" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="flex items-center gap-4 p-6 bg-orange-50 border border-orange-200 rounded-xl hover:bg-orange-100 transition-colors group"
+      >
+        <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-lg text-gray-900">Firebase Console</h3>
+          <p className="text-gray-500 text-sm">Database & auth management</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-orange-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    </div>
+
     <ContentGenerator />
   </div>
 );
@@ -150,23 +198,31 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/simulation" element={<SimulationPage />} />
-          <Route path="/simulator" element={<SimulationPage />} />
-          <Route path="/admin-tools" element={<AdminToolsPage />} />
-          <Route path="/podcast" element={<PodcastPage />} />
-          <Route path="/youtube" element={<YoutubePage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:id" element={<BlogPostDetail />} />
+            <Route path="/simulation" element={<SimulationPage />} />
+            <Route path="/simulator" element={<SimulationPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin-tools" element={
+              <ProtectedRoute>
+                <AdminToolsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/podcast" element={<PodcastPage />} />
+            <Route path="/youtube" element={<YoutubePage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </AuthProvider>
   );
 };
 
