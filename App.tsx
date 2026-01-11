@@ -22,6 +22,12 @@ const ServicesPage: React.FC = () => (
   </div>
 );
 
+const BlogPage: React.FC = () => (
+  <div className="pt-10">
+    <Blog />
+  </div>
+);
+
 const SimulationPage: React.FC = () => {
   return (
     <div className="bg-slate-900 min-h-screen">
@@ -155,6 +161,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/simulator" element={<SimulationPage />} />
           <Route path="/admin-tools" element={<AdminToolsPage />} />
