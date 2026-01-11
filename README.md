@@ -12,9 +12,23 @@ View your app in AI Studio: https://ai.studio/apps/drive/19YwMVv9egfbWlPUrA1a32h
 
 **Prerequisites:**  Node.js
 
-
 1. Install dependencies:
-   `npm install`
+   ```bash
+   npm install
+   ```
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
-   `npm run dev`
+   ```bash
+   npm run dev
+   ```
+
+## Deploy
+
+**See [DEPLOY.md](DEPLOY.md) for complete deployment guide.**
+
+Quick deploy:
+```bash
+./deploy.sh
+```
+
+Or use GitHub Actions for automatic deployment on every push to `main`.
