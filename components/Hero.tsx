@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />
-              <span>SECRET Clearance</span>
+              <span>Any Clearance</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-blue-500" />

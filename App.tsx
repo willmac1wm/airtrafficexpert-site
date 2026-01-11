@@ -6,11 +6,13 @@ import Services from './components/Services';
 import ContentGenerator from './components/ContentGenerator';
 import Blog from './components/Blog';
 import GameEmbed from './components/GameEmbed';
+import SimulatorBanner from './components/SimulatorBanner';
 import { PodcastPage, YoutubePage, NewsPage } from './components/MediaPages';
 
 const HomePage: React.FC = () => (
   <>
     <Hero />
+    <SimulatorBanner />
     <Services />
     <Blog />
   </>
