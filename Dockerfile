@@ -2,17 +2,20 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Force cache bust: 2026-01-11-v2
+ARG CACHE_BUST=1
+
 # Copy package files
 COPY package*.json ./
 
 # Install ALL dependencies (including devDependencies for build)
 RUN npm ci
 
-# Copy source files
+# Copy ALL source files (ensure fresh build)
 COPY . .
 
-# Build the app
-RUN npm run build
+# Clear any cached build output and rebuild
+RUN rm -rf dist && npm run build
 
 # Remove devDependencies to reduce image size
 RUN npm prune --production
