@@ -1,16 +1,27 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+const distPath = join(__dirname, 'dist');
+
+// Check if dist directory exists
+if (!existsSync(distPath)) {
+  console.error(`ERROR: dist directory not found at ${distPath}`);
+  console.error('Make sure to run "npm run build" before starting the server');
+  process.exit(1);
+}
+
+console.log(`Starting server with dist path: ${distPath}`);
 
 // Serve static files from dist directory (CSS, JS, images, etc.)
 // This must come BEFORE the catch-all route
-app.use(express.static(join(__dirname, 'dist'), {
+app.use(express.static(distPath, {
   maxAge: '1y',
   etag: true,
   lastModified: true
@@ -26,7 +37,7 @@ app.get('*', (req, res, next) => {
   }
   
   // Serve index.html for all page routes
-  res.sendFile(join(__dirname, 'dist', 'index.html'), (err) => {
+  res.sendFile(join(distPath, 'index.html'), (err) => {
     if (err) {
       console.error('Error serving index.html:', err);
       res.status(500).send('Error loading application');
@@ -34,7 +45,8 @@ app.get('*', (req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Serving files from: ${join(__dirname, 'dist')}`);
+  console.log('Listening on all interfaces (0.0.0.0)');
 });
