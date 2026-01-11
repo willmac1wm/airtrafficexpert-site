@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # Allows manual trigger
 
 env:
-  PROJECT_ID: '495546644086'
+  PROJECT_ID: 'gen-lang-client-0349967525'
   SERVICE_NAME: 'air-traffic-expert-portal'
   REGION: 'us-west1'
 
@@ -41,7 +41,7 @@ jobs:
           if [ -z "${{ secrets.GCP_SA_KEY }}" ]; then
             echo "⚠️  GCP_SA_KEY secret not found!"
             echo "Please set up authentication:"
-            echo "1. Go to: https://console.cloud.google.com/iam-admin/serviceaccounts?project=495546644086"
+            echo "1. Go to: https://console.cloud.google.com/iam-admin/serviceaccounts?project=gen-lang-client-0349967525"
             echo "2. Create a service account with Cloud Run Admin role"
             echo "3. Create a JSON key and add it to GitHub Secrets as GCP_SA_KEY"
             echo "See DEPLOY.md for detailed instructions"
