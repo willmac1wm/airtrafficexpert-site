@@ -35,3 +35,6 @@ next-env.d.ts
 # secrets
 github-actions-key.json
 *.json.key
+
+# Local Netlify folder
+.netlify
