@@ -1,22 +1,24 @@
-backend:
-  name: github
-  repo: willmac1wm/airtrafficexpert-site
+﻿backend:
+  name: git-gateway
   branch: main
 
-media_folder: "public/images/blog"
-public_folder: "/images/blog"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: editorial_workflow
 
 collections:
-  - name: "posts"
+  - name: "blog"
     label: "Blog Posts"
-    folder: "content/posts"
+    folder: "content/blog"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "frontmatter"
+    extension: "md"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Author", name: "author", widget: "string", default: "Will Macomber"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["industry analysis"]}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "Title (H1)", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Body (Use H2/H3 inside the editor)", name: "body", widget: "markdown" }
